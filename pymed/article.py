@@ -66,7 +66,8 @@ class PubMedArticle(object):
 
     def _extractAbstract(self: object, xml_element: TypeVar("Element")) -> str:
         path = ".//AbstractText"
-        return getContent(element=xml_element, path=path)
+        abstract_element = xml_element.find(path)
+        return ''.join(abstract_element.itertext()) if abstract_element is not None else ''
 
     def _extractConclusions(self: object, xml_element: TypeVar("Element")) -> str:
         path = ".//AbstractText[@Label='CONCLUSION']"
